@@ -59,6 +59,10 @@ public class GlobalConfig {
 	
 	public static final String CONFIG_GENERATE_MAPPER_DIR = "Generate_Mapper_Dir";
 	
+	public static final String CONFIG_MEMO_AUTHOR = "Memo_Author";
+	
+	public static final String CONFIG_MEMO_DATE_FORMAT = "Memo_Date_Format";
+	
 	public static final String CONFIG_TYPE_PREFIX = "Type_Convert_";
 	
 
@@ -70,17 +74,17 @@ public class GlobalConfig {
 	/**
 	 * 工程数据库类型 目前仅支持MYSQL
 	 */
-	private String dbType = "MYSQL";
+	private String dbType;
 
 	/**
 	 * 表前缀，在实体的基础上加入前缀，如ProdOffer转化为t_prod_offer,t为前缀
 	 */
-	private String tablePrefix = "t";
+	private String tablePrefix;
 	
 	/**
 	 * 生成文件的两种方式，Project和Local两种方式
 	 */
-	private String generateMethod = "Project";
+	private String generateMethod;
 	
 	/**
 	 * Local方式本地文件存放的位置
@@ -90,22 +94,26 @@ public class GlobalConfig {
 	/**
 	 * controller的目录
 	 */
-	private String generateControllerDir = "controller";
+	private String generateControllerDir;
 	
 	/**
 	 * service的目录
 	 */
-	private String generateServiceDir = "service";
+	private String generateServiceDir;
 	
 	/**
 	 * mapper的目录
 	 */
-	private String generateMapperDir = "mapper";
+	private String generateMapperDir;
 
 	/**
 	 * 字段前缀，同表前缀
 	 */
-	private String columnPrefix = "";
+	private String columnPrefix;
+	
+	private String memoAuthor;
+	
+	private String memoDateFormat;
 
 	/**
 	 * 实体类型和数据库类型的默认转化
@@ -161,22 +169,26 @@ public class GlobalConfig {
 	private void bindProperties(Properties properties) {
 		String basePackage = properties.getProperty(CONFIG_BASE_PACKAGE,"");
 		globalConfig.setBasePackage(basePackage.trim());
-		String dbType = properties.getProperty(CONFIG_DB_TYPE,"");
+		String dbType = properties.getProperty(CONFIG_DB_TYPE,"MYSQL");
 		globalConfig.setDbType(dbType.trim());
-		String tablePrefix = properties.getProperty(CONFIG_TABLE_PREFIX,"");
+		String tablePrefix = properties.getProperty(CONFIG_TABLE_PREFIX,"t");
 		globalConfig.setTablePrefix(tablePrefix.trim());
 		String columnPrefix = properties.getProperty(CONFIG_COLUMN_PREFIX,"");
 		globalConfig.setColumnPrefix(columnPrefix.trim());
-		String generateMethod = properties.getProperty(CONFIG_GENERATE_METHOD,"");
+		String generateMethod = properties.getProperty(CONFIG_GENERATE_METHOD,"Project");
 		globalConfig.setGenerateMethod(generateMethod.trim());
 		String baseDir = properties.getProperty(CONFIG_BASE_DIR,"");
 		globalConfig.setBaseDir(baseDir.trim());
-		String generateControllerDir = properties.getProperty(CONFIG_GENERATE_CONTROLLER_DIR,"");
+		String generateControllerDir = properties.getProperty(CONFIG_GENERATE_CONTROLLER_DIR,"controller");
 		globalConfig.setGenerateControllerDir(generateControllerDir.trim());
-		String generateServiceDir = properties.getProperty(CONFIG_GENERATE_SERVICE_DIR,"");
+		String generateServiceDir = properties.getProperty(CONFIG_GENERATE_SERVICE_DIR,"service");
 		globalConfig.setGenerateServiceDir(generateServiceDir.trim());
-		String generateMapperDir = properties.getProperty(CONFIG_GENERATE_MAPPER_DIR,"");
+		String generateMapperDir = properties.getProperty(CONFIG_GENERATE_MAPPER_DIR,"mapper");
 		globalConfig.setGenerateMapperDir(generateMapperDir.trim());
+		String memoAuthor = properties.getProperty(CONFIG_MEMO_AUTHOR,"Athena");
+		globalConfig.setMemoAuthor(memoAuthor.trim());
+		String memoDateFormat = properties.getProperty(CONFIG_MEMO_DATE_FORMAT,"yyyy-MM-dd hh:mm:ss");
+		globalConfig.setMemoDateFormat(memoDateFormat.trim());
 		Map<Class<?>,String> typeConvertRelMap = new HashMap<Class<?>, String>();
 		Set<Object> keys = properties.keySet();
 		for(Object o : keys) {
@@ -217,11 +229,6 @@ public class GlobalConfig {
 		
 	}
 	
-	public static void main(String[] args) {
-		GlobalConfig config = GlobalConfig.getInstance().init();
-		System.out.println(config.getTypeConvertRelMap());
-	}
-
 	public String getBasePackage() {
 		return basePackage;
 	}
@@ -300,6 +307,22 @@ public class GlobalConfig {
 
 	public void setGenerateMapperDir(String generateMapperDir) {
 		this.generateMapperDir = generateMapperDir;
+	}
+
+	public String getMemoAuthor() {
+		return memoAuthor;
+	}
+
+	public void setMemoAuthor(String memoAuthor) {
+		this.memoAuthor = memoAuthor;
+	}
+
+	public String getMemoDateFormat() {
+		return memoDateFormat;
+	}
+
+	public void setMemoDateFormat(String memoDateFormat) {
+		this.memoDateFormat = memoDateFormat;
 	}
 	
 	

@@ -769,4 +769,17 @@ public final class StringUtil extends StringUtils {
             return format.format(money);
         }
     }
+
+    /**
+     *  将字符串的第一个字母小写
+     * @param str
+     * @return
+     */
+    public static String firstLetter(String str) {
+        char[] chars = str.toCharArray();
+        if(chars[0] >= 'A' && chars[0] <= 'Z') {
+            chars[0] += 32;
+        }
+        return new String(chars);
+    }
 }

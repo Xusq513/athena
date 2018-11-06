@@ -1,9 +1,13 @@
 package com.refutrue.athena.bean;
 
+import com.refutrue.athena.utils.base.BaseBean;
+import com.refutrue.athena.utils.template.annotation.Ignore;
+import com.refutrue.athena.utils.template.annotation.Title;
+
 import java.io.Serializable;
 
-public class User implements Serializable {
-    private Integer id;
+@Title(value = "用户信息")
+public class User extends BaseBean implements Serializable {
 
     private String userName;
 
@@ -11,15 +15,8 @@ public class User implements Serializable {
 
     private String phone;
 
+    @Ignore
     private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;

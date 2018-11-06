@@ -1,24 +1,13 @@
 package com.refutrue.athena.mapper;
 
-
 import com.refutrue.athena.bean.User;
+import com.refutrue.athena.utils.base.BaseMapper;
 
-import java.util.List;
-import java.util.Map;
+/**
+ * @Author: Michael Xu
+ * @DateTime: 2018-11-06 04:54:23
+ * @Description: 用户信息çDaoå±
+ */
+public interface UserMapper extends BaseMapper<User>{
 
-public interface UserMapper {
-
-    public int insert(User record);
-
-    public int delete(Integer userId);
-
-    public int update(User record);
-
-    public User selectByPrimaryKey(Integer userId);
-
-    public List<User> selectAllUser(Map<String,Object> inMap);
-
-    public List<User> selectPaginationUser(Map<String,Object> inMap);
-
-    public long count(Map<String,Object> inMap);
 }

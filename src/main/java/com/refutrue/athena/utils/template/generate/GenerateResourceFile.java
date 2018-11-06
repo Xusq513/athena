@@ -7,7 +7,7 @@ import com.refutrue.athena.utils.template.exception.TemplateException;
 
 public class GenerateResourceFile extends GenerateAdapter{
 	
-	public static final String basePath = "src/main/resource/";
+	public static final String basePath = "src/main/resources/";
 
 	@Override
 	public void generate(String path, StringBuilder sb) throws TemplateException {

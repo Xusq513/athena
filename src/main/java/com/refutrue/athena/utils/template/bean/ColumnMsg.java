@@ -2,18 +2,28 @@ package com.refutrue.athena.utils.template.bean;
 
 public class ColumnMsg {
 	
-	public String columnName;
+	private String columnName;
 	
-	public String columnType;
+	private String columnType;
 	
-	public String columnTitle;
+	private String columnTitle;
 	
-	public boolean isPrimaryKey;
+	private boolean isPrimaryKey;
 	
-	public boolean isNotNull;
+	private boolean isNotNull;
 	
-	public boolean isAutoIncrement;
+	private boolean isAutoIncrement;
 	
+	private String propertyName;
+	
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
 
 	public boolean isAutoIncrement() {
 		return isAutoIncrement;

@@ -4,6 +4,5 @@ IF EXISTS `${tableMsg.tableName}`;
 CREATE TABLE `${tableMsg.tableName}` (
     #foreach($columnMsg in $tableMsg.columnMsgList)
 `${columnMsg.columnName}` ${columnMsg.columnType}   #if($columnMsg.isPrimaryKey()) PRIMARY KEY #end #if($columnMsg.isAutoIncrement()) AUTO_INCREMENT #end #if($columnMsg.isNotNull()) NOT NULL #end COMMENT '${columnMsg.columnTitle}' #if($velocityCount != $tableMsg.columnMsgList.size()),#end   
-    
     #end
 ) COMMENT = '$tableMsg.tableTitle' ENGINE = ${tableMsg.engine} DEFAULT CHARSET = utf8;

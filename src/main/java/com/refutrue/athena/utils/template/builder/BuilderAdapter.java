@@ -1,12 +1,16 @@
 package com.refutrue.athena.utils.template.builder;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.template.annotation.Column;
 import com.refutrue.athena.utils.template.annotation.Ignore;
+import com.refutrue.athena.utils.template.annotation.Memo;
 import com.refutrue.athena.utils.template.annotation.Table;
 import com.refutrue.athena.utils.template.annotation.Title;
+import com.refutrue.athena.utils.template.bean.BeanMsg;
 import com.refutrue.athena.utils.template.bean.ColumnMsg;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.bean.TableMsg;
@@ -15,7 +19,7 @@ import com.refutrue.athena.utils.template.exception.TemplateException;
 public abstract class BuilderAdapter implements IBuilder{
 
 	
-	public TableMsg collectionTableMsg(Class<?> cls) throws TemplateException{
+	public TableMsg collectTableMsg(Class<?> cls) throws TemplateException{
 		GlobalConfig globalConfig = GlobalConfig.getInstance().init();
 		TableMsg tableMsg = new TableMsg();
 		String dbType = globalConfig.getDbType();
@@ -102,10 +106,48 @@ public abstract class BuilderAdapter implements IBuilder{
 		    columnMsg.setNotNull(isNotNull);
 		    columnMsg.setPrimaryKey(isPrimaryKey);
 		    columnMsg.setAutoIncrement(isAutoIncrement);
+		    columnMsg.setPropertyName(field.getName());
 		    tableMsg.addColumn(columnMsg);
 		}
 		return tableMsg;
 	}
+	
+	public BeanMsg collectBeanMsg(Class<?> cls) {
+		GlobalConfig globalConfig = GlobalConfig.getInstance().init();
+		BeanMsg beanMsg = new BeanMsg();
+		String author = globalConfig.getMemoAuthor();
+		String dateFormat = globalConfig.getMemoDateFormat();
+		String beanName = cls.getName();
+		String beanSimpleName = cls.getSimpleName();
+		Memo memo = cls.getAnnotation(Memo.class);
+		if(memo != null) {
+			if(StringUtil.isNotEmptyOrNull(memo.author())) {
+				author = memo.author();
+			}
+			if(StringUtil.isNotEmptyOrNull(memo.dateFormat())) {
+				dateFormat = memo.dateFormat();
+			}
+		}
+		Title title = cls.getAnnotation(Title.class);
+		if(title != null) {
+			if(StringUtil.isNotEmptyOrNull(title.value())) {
+				beanMsg.setTitle(title.value());
+			}
+		}
+		if(StringUtil.isEmptyOrNull(beanMsg.getTitle())) {
+			beanMsg.setTitle(cls.getSimpleName());
+		}
+		String firstLetterBeanName = StringUtil.firstLetter(beanSimpleName);
+		beanMsg.setAuthor(author);
+		SimpleDateFormat formater = new SimpleDateFormat(dateFormat);
+		beanMsg.setDate(formater.format(new Date()));
+		beanMsg.setBeanName(beanName);
+		beanMsg.setBeanSimpleName(beanSimpleName);
+		beanMsg.setFirstLetterBeanName(firstLetterBeanName);
+		return beanMsg;
+	}
+	
+
 	
 	/**
 	 * Project下Java和Resource目录地址获取

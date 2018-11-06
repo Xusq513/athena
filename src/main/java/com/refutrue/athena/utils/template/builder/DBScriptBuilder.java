@@ -13,7 +13,7 @@ public class DBScriptBuilder extends BuilderAdapter{
 
 	@Override
 	public void execute(Class<?> cls) throws TemplateException{
-		TableMsg tableMsg = collectionTableMsg(cls);
+		TableMsg tableMsg = collectTableMsg(cls);
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("tableMsg", tableMsg);
 		String templateName = "DB_" +  tableMsg.getDbType() + ".vm";
