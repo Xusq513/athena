@@ -2,8 +2,11 @@ package com.refutrue.athena.utils.template.builder;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.template.annotation.Column;
 import com.refutrue.athena.utils.template.annotation.Ignore;
@@ -58,7 +61,8 @@ public abstract class BuilderAdapter implements IBuilder{
 		tableMsg.setTableSpace(tableSpace);
 		tableMsg.setTableTitle(tableTitle);
 		tableMsg.setDbType(dbType);
-		Field[] fieldList = cls.getDeclaredFields();
+		List<Field> fieldList = new ArrayList<>();
+		ReflectUtil.getAllFieldByBean(cls,fieldList);
 		for(Field field : fieldList) {
 			ColumnMsg columnMsg = new ColumnMsg();
 			String columnName = "";

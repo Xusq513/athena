@@ -1,7 +1,9 @@
 package com.refutrue.athena.utils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +29,26 @@ public class ReflectUtil {
 			
 		}
 		return returnMap;
+	}
+
+	/**
+	 * 获取一个类下面的所有字段，包含父类的字段
+	 * @param cls 类
+	 * @param list 返回的集合
+	 */
+	public static void getAllFieldByBean(Class<?> cls,List<Field> list){
+		if(list == null) {
+			list = new ArrayList<>();
+		}
+		Field[] fields = cls.getDeclaredFields();
+		for(Field f : fields) {
+			list.add(f);
+		}
+		if(cls.getSuperclass() == null) {
+			return;
+		}else {
+			getAllFieldByBean(cls.getSuperclass(),list);
+		}
 	}
 	
 }
