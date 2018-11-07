@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.refutrue.athena.mapper.StudentMapper">
+
+  <resultMap id="BaseResultMap" type="com.refutrue.athena.bean.Student">
+          <result column="name"  property="name" />
+          <result column="age"  property="age" />
+          <result column="gender"  property="gender" />
+          <result column="birth_day"  property="birthDay" />
+          <result column="address"  property="address" />
+          <result column="country"  property="country" />
+          <result column="hobby"  property="hobby" />
+          <result column="grade_id"  property="gradeId" />
+          <result column="id"  property="id" />
+          <result column="operate_user"  property="operateUser" />
+          <result column="operate_time"  property="operateTime" />
+          <result column="create_time"  property="createTime" />
+      </resultMap>
+
+  <sql id="Base_Column_List">
+           name ,           age ,           gender ,           birth_day ,           address ,           country ,           hobby ,           grade_id ,           id ,           operate_user ,           operate_time ,           create_time        </sql>
+
+  <insert id="insert" parameterType="com.refutrue.athena.bean.Student">
+    insert into t_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+              <if test="name != null">
+         name,
+        </if>
+              <if test="age != null">
+         age,
+        </if>
+              <if test="gender != null">
+         gender,
+        </if>
+              <if test="birthDay != null">
+         birth_day,
+        </if>
+              <if test="address != null">
+         address,
+        </if>
+              <if test="country != null">
+         country,
+        </if>
+              <if test="hobby != null">
+         hobby,
+        </if>
+              <if test="gradeId != null">
+         grade_id,
+        </if>
+              <if test="id != null">
+         id,
+        </if>
+              <if test="operateUser != null">
+         operate_user,
+        </if>
+              <if test="operateTime != null">
+         operate_time,
+        </if>
+              <if test="createTime != null">
+         create_time,
+        </if>
+          </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+              <if test="name != null">
+        #{name},
+      </if>
+              <if test="age != null">
+        #{age},
+      </if>
+              <if test="gender != null">
+        #{gender},
+      </if>
+              <if test="birthDay != null">
+        #{birthDay},
+      </if>
+              <if test="address != null">
+        #{address},
+      </if>
+              <if test="country != null">
+        #{country},
+      </if>
+              <if test="hobby != null">
+        #{hobby},
+      </if>
+              <if test="gradeId != null">
+        #{gradeId},
+      </if>
+              <if test="id != null">
+        #{id},
+      </if>
+              <if test="operateUser != null">
+        #{operateUser},
+      </if>
+              <if test="operateTime != null">
+        #{operateTime},
+      </if>
+              <if test="createTime != null">
+        #{createTime},
+      </if>
+          </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from t_student
+    where id = #{id}
+  </delete>
+
+  <update id="update" parameterType="com.refutrue.athena.bean.Student">
+    update t_student
+    <set>
+                         <if test="name != null">
+           name = #{name},
+         </if>
+                         <if test="age != null">
+           age = #{age},
+         </if>
+                         <if test="gender != null">
+           gender = #{gender},
+         </if>
+                         <if test="birthDay != null">
+           birth_day = #{birthDay},
+         </if>
+                         <if test="address != null">
+           address = #{address},
+         </if>
+                         <if test="country != null">
+           country = #{country},
+         </if>
+                         <if test="hobby != null">
+           hobby = #{hobby},
+         </if>
+                         <if test="gradeId != null">
+           grade_id = #{gradeId},
+         </if>
+                         	#continue
+                  <if test="id != null">
+           id = #{id},
+         </if>
+                         <if test="operateUser != null">
+           operate_user = #{operateUser},
+         </if>
+                         <if test="operateTime != null">
+           operate_time = #{operateTime},
+         </if>
+                         <if test="createTime != null">
+           create_time = #{createTime},
+         </if>
+           </set>
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_student
+    where id = #{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from t_student
+    <where>
+                <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="age != null">
+           and age = #{age}
+         </if>
+                <if test="gender != null">
+           and gender = #{gender}
+         </if>
+                <if test="birthDay != null">
+           and birth_day = #{birthDay}
+         </if>
+                <if test="address != null">
+           and address = #{address}
+         </if>
+                <if test="country != null">
+           and country = #{country}
+         </if>
+                <if test="hobby != null">
+           and hobby = #{hobby}
+         </if>
+                <if test="gradeId != null">
+           and grade_id = #{gradeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+     ${order}
+  </select>
+
+  <select id="selectPagination" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    (select
+    <include refid="Base_Column_List" />
+    from t_student
+    <where>
+                <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="age != null">
+           and age = #{age}
+         </if>
+                <if test="gender != null">
+           and gender = #{gender}
+         </if>
+                <if test="birthDay != null">
+           and birth_day = #{birthDay}
+         </if>
+                <if test="address != null">
+           and address = #{address}
+         </if>
+                <if test="country != null">
+           and country = #{country}
+         </if>
+                <if test="hobby != null">
+           and hobby = #{hobby}
+         </if>
+                <if test="gradeId != null">
+           and grade_id = #{gradeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+    ${order}
+    ) t
+     limit #{pageSize} offset #{startRow}
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Long">
+    select
+    count(1)
+    from t_student
+    <where>
+               <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="age != null">
+           and age = #{age}
+         </if>
+                <if test="gender != null">
+           and gender = #{gender}
+         </if>
+                <if test="birthDay != null">
+           and birth_day = #{birthDay}
+         </if>
+                <if test="address != null">
+           and address = #{address}
+         </if>
+                <if test="country != null">
+           and country = #{country}
+         </if>
+                <if test="hobby != null">
+           and hobby = #{hobby}
+         </if>
+                <if test="gradeId != null">
+           and grade_id = #{gradeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+  </select>
+</mapper>
