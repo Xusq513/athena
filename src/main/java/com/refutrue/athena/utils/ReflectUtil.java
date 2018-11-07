@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.refutrue.athena.utils.template.annotation.Calender;
 import com.refutrue.athena.utils.template.annotation.Ignore;
+import com.refutrue.athena.utils.template.annotation.Title;
 
 /**
  * 反射通用工具类
@@ -142,6 +143,22 @@ public class ReflectUtil {
 		} else {
 			getAllFieldByBean(cls.getSuperclass(), list);
 		}
+	}
+	
+	/**
+	 *  获取字段title，获取不到取字段的名称
+	 * @param f
+	 * @return
+	 */
+	public static String getTitleName(Field f) {
+		String titleName = "";
+		Title title = f.getAnnotation(Title.class);
+		if(title == null) {
+			titleName = f.getName();
+		}else {
+			titleName = title.value();
+		}
+		return titleName;
 	}
 
 }

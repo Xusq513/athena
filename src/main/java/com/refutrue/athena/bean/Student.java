@@ -9,6 +9,7 @@ import com.refutrue.athena.utils.template.annotation.Calender;
 import com.refutrue.athena.utils.template.annotation.Column;
 import com.refutrue.athena.utils.template.annotation.Ignore;
 import com.refutrue.athena.utils.template.annotation.Title;
+import com.refutrue.athena.utils.template.annotation.Validate;
 
 @Title("学生信息")
 public class Student extends BaseBean implements Serializable{
@@ -17,9 +18,11 @@ public class Student extends BaseBean implements Serializable{
 	private static final long serialVersionUID = 4040484417229617858L;
 
 	@Title("姓名")
+	@Validate(required=true,length=30)
 	private String name;
 	
 	@Title("年龄")
+	@Validate(required=true,maxNum=200,minNum=1)
 	private Integer age;
 	
 	@Title("性别")
@@ -28,6 +31,7 @@ public class Student extends BaseBean implements Serializable{
 	@Title("生日")
 	@Column(columnType="DATE")
 	@Calender(javaFormatter="yyyy-MM-dd")
+	@Validate(required=true,startTime="1900-01-01 00:00:00",endTime="now")
 	private Date birthDay;
 	
 	@Title("住址")
