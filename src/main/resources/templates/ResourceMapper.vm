@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${globalConfig.basePackage}.${globalConfig.generateMapperDir}.${beanMsg.beanSimpleName}Mapper">
+
+  <resultMap id="BaseResultMap" type="${beanMsg.beanName}">
+    #foreach($columnMsg in $tableMsg.columnMsgList)
+      <result column="${columnMsg.columnName}"  property="${columnMsg.propertyName}" />
+    #end
+  </resultMap>
+
+  <sql id="Base_Column_List">
+     #foreach($columnMsg in $tableMsg.columnMsgList)
+      ${columnMsg.columnName} #if($velocityCount != $tableMsg.columnMsgList.size()),#end 
+     #end
+  </sql>
+
+  <insert id="insert" parameterType="${beanMsg.beanName}">
+    insert into ${tableMsg.tableName}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      #foreach($columnMsg in $tableMsg.columnMsgList)
+        <if test="${columnMsg.propertyName} != null">
+         ${columnMsg.columnName},
+        </if>
+      #end
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #foreach($columnMsg in $tableMsg.columnMsgList)
+        <if test="${columnMsg.propertyName} != null">
+        #{${columnMsg.propertyName}},
+      </if>
+      #end
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from ${tableMsg.tableName}
+    where id = #{id}
+  </delete>
+
+  <update id="update" parameterType="${beanMsg.beanName}">
+    update ${tableMsg.tableName}
+    <set>
+       #foreach($columnMsg in $tableMsg.columnMsgList)
+         #if(${columnMsg.propertyName} == "id")
+         	#continue
+         #end 
+         <if test="${columnMsg.propertyName} != null">
+           ${columnMsg.columnName} = #{${columnMsg.propertyName}},
+         </if>
+       #end 
+    </set>
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ${tableMsg.tableName}
+    where id = #{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from ${tableMsg.tableName}
+    <where>
+       #foreach($columnMsg in $tableMsg.columnMsgList)
+         <if test="${columnMsg.propertyName} != null">
+           and ${columnMsg.columnName} = #{${columnMsg.propertyName}}
+         </if>
+       #end 
+    </where>
+     ${order}
+  </select>
+
+  <select id="selectPagination" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    (select
+    <include refid="Base_Column_List" />
+    from ${tableMsg.tableName}
+    <where>
+       #foreach($columnMsg in $tableMsg.columnMsgList)
+         <if test="${columnMsg.propertyName} != null">
+           and ${columnMsg.columnName} = #{${columnMsg.propertyName}}
+         </if>
+       #end 
+    </where>
+    ${order}
+    ) t
+     limit #{pageSize} offset #{startRow}
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Long">
+    select
+    count(1)
+    from ${tableMsg.tableName}
+    <where>
+      #foreach($columnMsg in $tableMsg.columnMsgList)
+         <if test="${columnMsg.propertyName} != null">
+           and ${columnMsg.columnName} = #{${columnMsg.propertyName}}
+         </if>
+       #end 
+    </where>
+  </select>
+</mapper>

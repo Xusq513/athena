@@ -1,0 +1,13 @@
+package ${globalConfig.basePackage}.${globalConfig.generateMapperDir};
+
+import ${beanMsg.beanName};
+import com.refutrue.athena.utils.base.BaseMapper;
+
+/**
+ * @Author: ${beanMsg.author}
+ * @DateTime: ${beanMsg.date}
+ * @Description: ${beanMsg.title}的Dao层
+ */
+public interface ${beanMsg.beanSimpleName}Mapper extends BaseMapper<${beanMsg.beanSimpleName}>{
+
+}

@@ -1,0 +1,27 @@
+package ${globalConfig.basePackage}.${globalConfig.generateControllerDir}; 
+
+import ${beanMsg.beanName}; 
+import ${globalConfig.basePackage}.${globalConfig.generateServiceDir}.${beanMsg.beanSimpleName}ServiceImpl; 
+import com.refutrue.athena.utils.base.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @Author: ${beanMsg.author}
+ * @DateTime: ${beanMsg.date}
+ * @Description: ${beanMsg.title}的控制层，遵从Rest规范
+ */
+@RestController
+@RequestMapping(value = "/${beanMsg.beanSimpleName}")
+public class ${beanMsg.beanSimpleName}Controller extends BaseController<${beanMsg.beanSimpleName}> {
+
+    @Autowired
+    private ${beanMsg.beanSimpleName}ServiceImpl ${beanMsg.firstLetterBeanName}Service;
+
+    @Autowired
+    public ${beanMsg.beanSimpleName}Controller(${beanMsg.beanSimpleName}ServiceImpl ${beanMsg.firstLetterBeanName}Service) {
+        super.entityClass = ${beanMsg.beanSimpleName}.class;
+        super.baseService = ${beanMsg.firstLetterBeanName}Service;
+    }
+}

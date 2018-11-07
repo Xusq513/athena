@@ -1,0 +1,25 @@
+package ${globalConfig.basePackage}.${globalConfig.generateServiceDir};
+
+import ${beanMsg.beanName}; 
+import ${globalConfig.basePackage}.${globalConfig.generateMapperDir}.${beanMsg.beanSimpleName}Mapper; 
+import com.refutrue.athena.utils.base.BaseServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @Author: ${beanMsg.author}
+ * @DateTime: ${beanMsg.date}
+ * @Description: ${beanMsg.title}的业务层
+ */
+@Service
+public class ${beanMsg.beanSimpleName}ServiceImpl extends BaseServiceImpl<${beanMsg.beanSimpleName}> {
+
+    @Autowired
+    private ${beanMsg.beanSimpleName}Mapper ${beanMsg.firstLetterBeanName}Mapper;
+
+    @Autowired
+    public ${beanMsg.beanSimpleName}ServiceImpl(${beanMsg.beanSimpleName}Mapper ${beanMsg.firstLetterBeanName}Mapper) {
+        super.baseMapper = ${beanMsg.firstLetterBeanName}Mapper;
+    }
+
+}
