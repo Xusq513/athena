@@ -1,14 +1,15 @@
 package com.refutrue.athena.utils.template.builder;
 
 import org.apache.velocity.VelocityContext;
+import org.springframework.stereotype.Component;
 
-import com.refutrue.athena.bean.User;
 import com.refutrue.athena.utils.template.bean.BeanMsg;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.exception.TemplateException;
 import com.refutrue.athena.utils.template.generate.GenerateFactory;
 import com.refutrue.athena.utils.template.velocity.VelocityUtil;
 
+@Component("mapperBuilder")
 public class MapperBuilder extends BuilderAdapter{
 
 	@Override
@@ -24,11 +25,6 @@ public class MapperBuilder extends BuilderAdapter{
 		GenerateFactory.getInstance().build(globalConfig.getGenerateMethod()).generate(path, new StringBuilder(velocityStr));
 	}
 	
-	public static void main(String[] args) {
-		MapperBuilder builder = new MapperBuilder();
-		builder.execute(User.class);
-	}
-
 	@Override
 	public void check(Class<?> cls) throws TemplateException {
 		

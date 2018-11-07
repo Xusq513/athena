@@ -15,10 +15,8 @@ import org.springframework.stereotype.Service;
 public class ${beanMsg.beanSimpleName}ServiceImpl extends BaseServiceImpl<${beanMsg.beanSimpleName}> {
 
     @Autowired
-    private ${beanMsg.beanSimpleName}Mapper ${beanMsg.firstLetterBeanName}Mapper;
-
-    @Autowired
     public ${beanMsg.beanSimpleName}ServiceImpl(${beanMsg.beanSimpleName}Mapper ${beanMsg.firstLetterBeanName}Mapper) {
+        super.entityClass = ${beanMsg.beanSimpleName}.class;
         super.baseMapper = ${beanMsg.firstLetterBeanName}Mapper;
     }
 

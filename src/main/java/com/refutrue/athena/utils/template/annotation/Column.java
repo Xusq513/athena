@@ -32,4 +32,5 @@ public @interface Column {
 	 * mysql是否自增长
 	 */
 	public boolean isAutoIncrement() default false;
+	
 }

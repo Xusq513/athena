@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.StringUtil;
+import com.refutrue.athena.utils.template.annotation.Calender;
 import com.refutrue.athena.utils.template.annotation.Column;
 import com.refutrue.athena.utils.template.annotation.Ignore;
 import com.refutrue.athena.utils.template.annotation.Memo;
@@ -104,9 +105,13 @@ public abstract class BuilderAdapter implements IBuilder{
 		    }else{
 		    	columnTitle = field.getName();
 		    }
+		    Calender calender = field.getAnnotation(Calender.class);
+		    if(calender != null && StringUtil.isNotEmptyOrNull(calender.javaFormatter())) {
+		    	columnMsg.setJavaFormatter(calender.javaFormatter());
+		    }
 		    columnMsg.setColumnName(columnName);
 		    columnMsg.setColumnTitle(columnTitle);
-		    columnMsg.setColumnType(columnType);
+		    columnMsg.setColumnType(columnType.toUpperCase());
 		    columnMsg.setNotNull(isNotNull);
 		    columnMsg.setPrimaryKey(isPrimaryKey);
 		    columnMsg.setAutoIncrement(isAutoIncrement);

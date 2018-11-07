@@ -1,7 +1,5 @@
 package com.refutrue.athena.utils.base;
 
-import com.refutrue.athena.bean.User;
-
 import java.util.List;
 import java.util.Map;
 

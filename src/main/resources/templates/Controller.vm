@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ${beanMsg.beanSimpleName}Controller extends BaseController<${beanMsg.beanSimpleName}> {
 
     @Autowired
-    private ${beanMsg.beanSimpleName}ServiceImpl ${beanMsg.firstLetterBeanName}Service;
-
-    @Autowired
     public ${beanMsg.beanSimpleName}Controller(${beanMsg.beanSimpleName}ServiceImpl ${beanMsg.firstLetterBeanName}Service) {
         super.entityClass = ${beanMsg.beanSimpleName}.class;
         super.baseService = ${beanMsg.firstLetterBeanName}Service;

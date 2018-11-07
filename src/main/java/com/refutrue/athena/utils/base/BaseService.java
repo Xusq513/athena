@@ -1,11 +1,10 @@
 package com.refutrue.athena.utils.base;
 
-import com.refutrue.athena.bean.User;
-import com.refutrue.athena.utils.exception.AthenaException;
-import com.refutrue.athena.utils.pojo.Pagination;
-
 import java.util.List;
 import java.util.Map;
+
+import com.refutrue.athena.utils.exception.AthenaException;
+import com.refutrue.athena.utils.pojo.Pagination;
 
 /**
  * @Auther: Michael Xu

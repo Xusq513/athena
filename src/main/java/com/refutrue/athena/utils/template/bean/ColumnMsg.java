@@ -16,6 +16,26 @@ public class ColumnMsg {
 	
 	private String propertyName;
 	
+    private String sqlFormatter;
+    
+    private String javaFormatter;
+    
+    
+	public String getJavaFormatter() {
+		return javaFormatter;
+	}
+
+	public void setJavaFormatter(String javaFormatter) {
+		this.javaFormatter = javaFormatter;
+	}
+
+	public String getSqlFormatter() {
+		return sqlFormatter;
+	}
+
+	public void setSqlFormatter(String sqlFormatter) {
+		this.sqlFormatter = sqlFormatter;
+	}
 
 	public String getPropertyName() {
 		return propertyName;

@@ -1,5 +1,6 @@
 package com.refutrue.athena.utils.base;
 
+import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.exception.AthenaException;
 import com.refutrue.athena.utils.pojo.Pagination;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,8 @@ import java.util.Map;
 public abstract class BaseServiceImpl<T> implements BaseService<T>{
 
     protected BaseMapper<T> baseMapper;
+    
+    protected Class<T> entityClass;
 
     @Override
     public void add(T t) throws AthenaException {
@@ -54,7 +57,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
             return  pagination;
         }
         List<T> list = baseMapper.selectPagination(inMap);
-        pagination.setList(list);
+        pagination.setList(ReflectUtil.beans2Map(entityClass, list));
         return pagination;
     }
 

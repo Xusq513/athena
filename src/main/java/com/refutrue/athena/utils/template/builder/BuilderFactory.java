@@ -1,5 +1,7 @@
 package com.refutrue.athena.utils.template.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,19 +15,36 @@ import java.util.List;
 @Component
 public class BuilderFactory {
 
-    private static List<IBuilder> builderList = new ArrayList<>();
+	private List<IBuilder> builderList = new ArrayList<>();
 
-    static {
-        builderList.add(new ResourceMapperBuilder());
-        builderList.add(new MapperBuilder());
-        builderList.add(new ServiceBuilder());
-        builderList.add(new ControllerBuilder());
-        builderList.add(new DBScriptBuilder());
-    }
+	@Autowired
+	@Qualifier(value = "resourceMapperBuilder")
+	private IBuilder resourceMapperBuilder;
 
-    public void execute(Class<?> cls){
-        builderList.forEach(builder ->{
-            builder.execute(cls);
-        });
-    }
+	@Autowired
+	@Qualifier(value = "mapperBuilder")
+	private IBuilder mapperBuilder;
+
+	@Autowired
+	@Qualifier(value = "serviceBuilder")
+	private IBuilder serviceBuilder;
+
+	@Autowired
+	@Qualifier(value = "controllerBuilder")
+	private IBuilder controllerBuilder;
+
+	@Autowired
+	@Qualifier(value = "dbScriptBuilder")
+	private IBuilder dbScriptBuilder;
+
+	public void execute(Class<?> cls) {
+		builderList.add(resourceMapperBuilder);
+		builderList.add(mapperBuilder);
+		builderList.add(serviceBuilder);
+		builderList.add(controllerBuilder);
+		builderList.add(dbScriptBuilder);
+		builderList.forEach(builder -> {
+			builder.execute(cls);
+		});
+	}
 }
