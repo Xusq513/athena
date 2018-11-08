@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.refutrue.athena.mapper.DicMapper">
+
+  <resultMap id="BaseResultMap" type="com.refutrue.athena.bean.Dic">
+          <result column="code"  property="code" />
+          <result column="name"  property="name" />
+          <result column="type"  property="type" />
+          <result column="description"  property="description" />
+          <result column="bak1"  property="bak1" />
+          <result column="bak2"  property="bak2" />
+          <result column="bak3"  property="bak3" />
+          <result column="dic_type_id"  property="dicTypeId" />
+          <result column="id"  property="id" />
+          <result column="operate_user"  property="operateUser" />
+          <result column="operate_time"  property="operateTime" />
+          <result column="create_time"  property="createTime" />
+      </resultMap>
+
+  <sql id="Base_Column_List">
+           code ,           name ,           type ,           description ,           bak1 ,           bak2 ,           bak3 ,           dic_type_id ,           id ,           operate_user ,           operate_time ,           create_time        </sql>
+
+  <insert id="insert" parameterType="com.refutrue.athena.bean.Dic">
+    insert into t_dic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+              <if test="code != null">
+         code,
+        </if>
+              <if test="name != null">
+         name,
+        </if>
+              <if test="type != null">
+         type,
+        </if>
+              <if test="description != null">
+         description,
+        </if>
+              <if test="bak1 != null">
+         bak1,
+        </if>
+              <if test="bak2 != null">
+         bak2,
+        </if>
+              <if test="bak3 != null">
+         bak3,
+        </if>
+              <if test="dicTypeId != null">
+         dic_type_id,
+        </if>
+              <if test="id != null">
+         id,
+        </if>
+              <if test="operateUser != null">
+         operate_user,
+        </if>
+              <if test="operateTime != null">
+         operate_time,
+        </if>
+              <if test="createTime != null">
+         create_time,
+        </if>
+          </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+              <if test="code != null">
+        #{code},
+      </if>
+              <if test="name != null">
+        #{name},
+      </if>
+              <if test="type != null">
+        #{type},
+      </if>
+              <if test="description != null">
+        #{description},
+      </if>
+              <if test="bak1 != null">
+        #{bak1},
+      </if>
+              <if test="bak2 != null">
+        #{bak2},
+      </if>
+              <if test="bak3 != null">
+        #{bak3},
+      </if>
+              <if test="dicTypeId != null">
+        #{dicTypeId},
+      </if>
+              <if test="id != null">
+        #{id},
+      </if>
+              <if test="operateUser != null">
+        #{operateUser},
+      </if>
+              <if test="operateTime != null">
+        #{operateTime},
+      </if>
+              <if test="createTime != null">
+        #{createTime},
+      </if>
+          </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from t_dic
+    where id = #{id}
+  </delete>
+
+  <update id="update" parameterType="com.refutrue.athena.bean.Dic">
+    update t_dic
+    <set>
+                         <if test="code != null">
+           code = #{code},
+         </if>
+                         <if test="name != null">
+           name = #{name},
+         </if>
+                         <if test="type != null">
+           type = #{type},
+         </if>
+                         <if test="description != null">
+           description = #{description},
+         </if>
+                         <if test="bak1 != null">
+           bak1 = #{bak1},
+         </if>
+                         <if test="bak2 != null">
+           bak2 = #{bak2},
+         </if>
+                         <if test="bak3 != null">
+           bak3 = #{bak3},
+         </if>
+                         <if test="dicTypeId != null">
+           dic_type_id = #{dicTypeId},
+         </if>
+                         	#continue
+                  <if test="id != null">
+           id = #{id},
+         </if>
+                         <if test="operateUser != null">
+           operate_user = #{operateUser},
+         </if>
+                         <if test="operateTime != null">
+           operate_time = #{operateTime},
+         </if>
+                         <if test="createTime != null">
+           create_time = #{createTime},
+         </if>
+           </set>
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_dic
+    where id = #{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from t_dic
+    <where>
+                <if test="code != null">
+           and code = #{code}
+         </if>
+                <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="type != null">
+           and type = #{type}
+         </if>
+                <if test="description != null">
+           and description = #{description}
+         </if>
+                <if test="bak1 != null">
+           and bak1 = #{bak1}
+         </if>
+                <if test="bak2 != null">
+           and bak2 = #{bak2}
+         </if>
+                <if test="bak3 != null">
+           and bak3 = #{bak3}
+         </if>
+                <if test="dicTypeId != null">
+           and dic_type_id = #{dicTypeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+     ${order}
+  </select>
+
+  <select id="selectPagination" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    (select
+    <include refid="Base_Column_List" />
+    from t_dic
+    <where>
+                <if test="code != null">
+           and code = #{code}
+         </if>
+                <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="type != null">
+           and type = #{type}
+         </if>
+                <if test="description != null">
+           and description = #{description}
+         </if>
+                <if test="bak1 != null">
+           and bak1 = #{bak1}
+         </if>
+                <if test="bak2 != null">
+           and bak2 = #{bak2}
+         </if>
+                <if test="bak3 != null">
+           and bak3 = #{bak3}
+         </if>
+                <if test="dicTypeId != null">
+           and dic_type_id = #{dicTypeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+    ${order}
+    ) t
+     limit #{pageSize} offset #{startRow}
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Long">
+    select
+    count(1)
+    from t_dic
+    <where>
+               <if test="code != null">
+           and code = #{code}
+         </if>
+                <if test="name != null">
+           and name = #{name}
+         </if>
+                <if test="type != null">
+           and type = #{type}
+         </if>
+                <if test="description != null">
+           and description = #{description}
+         </if>
+                <if test="bak1 != null">
+           and bak1 = #{bak1}
+         </if>
+                <if test="bak2 != null">
+           and bak2 = #{bak2}
+         </if>
+                <if test="bak3 != null">
+           and bak3 = #{bak3}
+         </if>
+                <if test="dicTypeId != null">
+           and dic_type_id = #{dicTypeId}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+  </select>
+</mapper>

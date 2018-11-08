@@ -10,4 +10,5 @@ import com.refutrue.athena.utils.base.BaseMapper;
  */
 public interface StudentMapper extends BaseMapper<Student>{
 
+	public Student selectByPrimaryKey(Integer userId);
 }
