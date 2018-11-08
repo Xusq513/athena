@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 /**
- * 加上此标识，代表此属性，不是表单内容
+ * 加上此标识，代表此属性，不属于数据库字段内容
 * <p>Title: Ignore</p>  
 * <p>Description: </p>  
 * @author Xusq  

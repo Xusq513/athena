@@ -20,12 +20,12 @@ public @interface Validate {
 	public int length() default Integer.MAX_VALUE;
 	
 	/**
-	 * 最大值,结合权重进行计算
+	 * 最大值,结合权重进行计算,闭区间
 	 */
 	public long maxNum() default Long.MAX_VALUE;
 	
 	/**
-	 * 最小值,结合权重进行计算
+	 * 最小值,结合权重进行计算,闭区间
 	 */
 	public long minNum() default Long.MIN_VALUE;
 	

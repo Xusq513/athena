@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/Student")
 public class StudentController extends BaseController<Student> {
-
+	
     @Autowired
     public StudentController(StudentServiceImpl studentService) {
         super.entityClass = Student.class;

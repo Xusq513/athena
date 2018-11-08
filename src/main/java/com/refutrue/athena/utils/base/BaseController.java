@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.constants.WebContants;
 import com.refutrue.athena.utils.exception.AthenaException;
 import com.refutrue.athena.utils.pojo.Pagination;
+import com.refutrue.athena.utils.validate.ValidateFactory;
 
 /**
  * @Auther: Michael Xu
@@ -33,6 +35,9 @@ public abstract class BaseController<T> {
     protected BaseService<T> baseService;
 
     protected Class<T> entityClass;
+    
+    @Autowired
+    private ValidateFactory ValidateFactory;
 
     @PostMapping
     public ResponseMsg add(HttpServletRequest request){
@@ -41,6 +46,7 @@ public abstract class BaseController<T> {
         T t;
         try{
             t = JSON.parseObject(_json,entityClass);
+            ValidateFactory.valid(entityClass, t);
             baseService.add(t);
         }catch (AthenaException e){
             e.printStackTrace();
@@ -63,6 +69,7 @@ public abstract class BaseController<T> {
         T t;
         try{
             t = JSON.parseObject(_json,entityClass);
+            ValidateFactory.valid(entityClass, t);
             baseService.update(t);
         }catch (AthenaException e){
             e.printStackTrace();
