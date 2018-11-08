@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.refutrue.athena.bean.User;
 import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.bean.TableMsg;
@@ -36,12 +35,6 @@ public class DBScriptBuilder extends BuilderAdapter{
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		DBScriptBuilder builder = new DBScriptBuilder();
-		builder.execute(User.class);
-	}
-	
 	
 
 	@Override

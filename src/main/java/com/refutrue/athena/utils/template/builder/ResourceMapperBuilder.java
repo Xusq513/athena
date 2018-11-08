@@ -3,7 +3,6 @@ package com.refutrue.athena.utils.template.builder;
 import org.apache.velocity.VelocityContext;
 import org.springframework.stereotype.Component;
 
-import com.refutrue.athena.bean.User;
 import com.refutrue.athena.utils.template.bean.BeanMsg;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.bean.TableMsg;
@@ -29,11 +28,6 @@ public class ResourceMapperBuilder extends BuilderAdapter{
 		GenerateFactory.getInstance().build("Resource").generate(path, new StringBuilder(velocityStr));
 	}
 	
-	public static void main(String[] args) {
-		ResourceMapperBuilder builder = new ResourceMapperBuilder();
-		builder.execute(User.class);
-	}
-
 	@Override
 	public void check(Class<?> cls) throws TemplateException {
 		

@@ -3,7 +3,6 @@ package com.refutrue.athena.utils.template.builder;
 import org.apache.velocity.VelocityContext;
 import org.springframework.stereotype.Component;
 
-import com.refutrue.athena.bean.User;
 import com.refutrue.athena.utils.template.bean.BeanMsg;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.exception.TemplateException;
@@ -26,11 +25,6 @@ public class ControllerBuilder extends BuilderAdapter{
 		GenerateFactory.getInstance().build(globalConfig.getGenerateMethod()).generate(path, new StringBuilder(velocityStr));
 	}
 	
-	public static void main(String[] args) {
-		ControllerBuilder builder = new ControllerBuilder();
-		builder.execute(User.class);
-	}
-
 	@Override
 	public void check(Class<?> cls) throws TemplateException {
 		
