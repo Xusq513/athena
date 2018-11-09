@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.refutrue.athena.bean.Dic;
+import com.refutrue.athena.bean.Student;
 import com.refutrue.athena.utils.template.builder.BuilderFactory;
 
 @RunWith(SpringRunner.class)
@@ -23,7 +24,7 @@ public class AthenaApplicationTests {
     
     @Test
     public void contextLoads() {
-        builderFactory.execute(Dic.class);
+        builderFactory.execute(Student.class);
     }
     
 //    @Test
