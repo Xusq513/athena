@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.exception.AthenaException;
+import com.refutrue.athena.utils.template.annotation.Order;
 import com.refutrue.athena.utils.template.annotation.Validate;
 
+@Order(3)
 @Component("numberValidate")
 public class NumberValidate extends ValidateAdapter{
 

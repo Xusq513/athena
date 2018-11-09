@@ -1,11 +1,11 @@
 package com.refutrue.athena.utils.template.builder;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.refutrue.athena.utils.ApplicationContextProvider;
 
 /**
  * @Auther: Michael Xu
@@ -15,34 +15,11 @@ import java.util.List;
 @Component
 public class BuilderFactory {
 
-	private List<IBuilder> builderList = new ArrayList<>();
-
 	@Autowired
-	@Qualifier(value = "resourceMapperBuilder")
-	private IBuilder resourceMapperBuilder;
-
-	@Autowired
-	@Qualifier(value = "mapperBuilder")
-	private IBuilder mapperBuilder;
-
-	@Autowired
-	@Qualifier(value = "serviceBuilder")
-	private IBuilder serviceBuilder;
-
-	@Autowired
-	@Qualifier(value = "controllerBuilder")
-	private IBuilder controllerBuilder;
-
-	@Autowired
-	@Qualifier(value = "dbScriptBuilder")
-	private IBuilder dbScriptBuilder;
+	private ApplicationContextProvider context;
 
 	public void execute(Class<?> cls) {
-		builderList.add(resourceMapperBuilder);
-		builderList.add(mapperBuilder);
-		builderList.add(serviceBuilder);
-		builderList.add(controllerBuilder);
-		builderList.add(dbScriptBuilder);
+		List<IBuilder> builderList = context.getBeanListByOrder(IBuilder.class);
 		builderList.forEach(builder -> {
 			builder.execute(cls);
 		});

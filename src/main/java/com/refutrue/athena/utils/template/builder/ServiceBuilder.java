@@ -3,12 +3,14 @@ package com.refutrue.athena.utils.template.builder;
 import org.apache.velocity.VelocityContext;
 import org.springframework.stereotype.Component;
 
+import com.refutrue.athena.utils.template.annotation.Order;
 import com.refutrue.athena.utils.template.bean.BeanMsg;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.exception.TemplateException;
 import com.refutrue.athena.utils.template.generate.GenerateFactory;
 import com.refutrue.athena.utils.template.velocity.VelocityUtil;
 
+@Order(3)
 @Component(value="serviceBuilder")
 public class ServiceBuilder extends BuilderAdapter{
 

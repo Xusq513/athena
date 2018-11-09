@@ -6,12 +6,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.refutrue.athena.utils.StringUtil;
+import com.refutrue.athena.utils.template.annotation.Order;
 import com.refutrue.athena.utils.template.bean.GlobalConfig;
 import com.refutrue.athena.utils.template.bean.TableMsg;
 import com.refutrue.athena.utils.template.exception.TemplateException;
 import com.refutrue.athena.utils.template.generate.GenerateFactory;
 import com.refutrue.athena.utils.template.velocity.VelocityUtil;
 
+@Order(5)
 @Component(value="dbScriptBuilder")
 public class DBScriptBuilder extends BuilderAdapter{
 	

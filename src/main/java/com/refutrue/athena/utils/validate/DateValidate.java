@@ -11,8 +11,10 @@ import com.refutrue.athena.utils.DateUtil;
 import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.exception.AthenaException;
+import com.refutrue.athena.utils.template.annotation.Order;
 import com.refutrue.athena.utils.template.annotation.Validate;
 
+@Order(4)
 @Component("dateValidate")
 public class DateValidate extends ValidateAdapter{
 
