@@ -1,4 +1,4 @@
-package com.refutrue.athena.utils.template.annotation;
+package com.refutrue.athena.utils.component.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

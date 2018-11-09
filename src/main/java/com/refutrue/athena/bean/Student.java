@@ -5,7 +5,8 @@ import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
 import com.refutrue.athena.utils.base.BaseBean;
-import com.refutrue.athena.utils.template.annotation.Calender;
+import com.refutrue.athena.utils.component.annotation.Calender;
+import com.refutrue.athena.utils.component.annotation.Select;
 import com.refutrue.athena.utils.template.annotation.Column;
 import com.refutrue.athena.utils.template.annotation.Ignore;
 import com.refutrue.athena.utils.template.annotation.Title;
@@ -26,7 +27,8 @@ public class Student extends BaseBean implements Serializable{
 	private Integer age;
 	
 	@Title("性别")
-	private Boolean gender;
+	@Select(type="性别")
+	private String gender;
 	
 	@Title("生日")
 	@Column(columnType="DATE")
@@ -63,11 +65,11 @@ public class Student extends BaseBean implements Serializable{
 		this.age = age;
 	}
 
-	public Boolean getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Boolean gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -109,17 +111,6 @@ public class Student extends BaseBean implements Serializable{
 
 	public void setGradeId(Integer gradeId) {
 		this.gradeId = gradeId;
-	}
-	
-	public static void main(String[] args) {
-		Student student = new Student();
-		student.setName("小冬芮");
-		student.setAge(28);
-		student.setCountry("CN");
-		student.setGender(true);
-		student.setBirthDay(new Date());
-		System.out.println(JSON.toJSON(student));
-		
 	}
 	
 }

@@ -1,12 +1,14 @@
 package com.refutrue.athena.utils.base;
 
-import com.refutrue.athena.utils.ReflectUtil;
-import com.refutrue.athena.utils.exception.AthenaException;
-import com.refutrue.athena.utils.pojo.Pagination;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.refutrue.athena.utils.component.convert.BindConvert;
+import com.refutrue.athena.utils.exception.AthenaException;
+import com.refutrue.athena.utils.pojo.Pagination;
 
 /**
  * @Auther: Michael Xu
@@ -19,6 +21,9 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
     protected BaseMapper<T> baseMapper;
     
     protected Class<T> entityClass;
+    
+    @Autowired
+    private BindConvert bindConvert;
 
     @Override
     public void add(T t) throws AthenaException {
@@ -57,7 +62,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
             return  pagination;
         }
         List<T> list = baseMapper.selectPagination(inMap);
-        pagination.setList(ReflectUtil.beans2Map(entityClass, list));
+        pagination.setList(bindConvert.convertList(entityClass, list));
         return pagination;
     }
 

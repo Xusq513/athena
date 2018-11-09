@@ -1,7 +1,5 @@
 package com.refutrue.athena.controller; 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +40,7 @@ public class DicController extends BaseController<Dic> {
         ResponseMsg responseMsg = new ResponseMsg();
         try{
             String type = StringUtil.obj2Str(request.getParameter("type"));
-            List<Map<String,String>> outMapList = new ArrayList<>();
-            List<Dic> list = dicService.getDicByType(type);
-            list.forEach(o -> {
-            	Map<String,String> outMap = new HashMap<>();
-            	outMap.put("code", o.getCode());
-            	outMap.put("name", o.getName());
-            	outMapList.add(outMap);
-            });
+            List<Map<String,String>> outMapList = dicService.selectList(type);
             responseMsg.setData(outMapList);
         }catch (AthenaException e){
             e.printStackTrace();

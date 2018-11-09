@@ -2,7 +2,7 @@ package com.refutrue.athena.utils.base;
 
 import java.util.Date;
 
-import com.refutrue.athena.utils.template.annotation.Calender;
+import com.refutrue.athena.utils.component.annotation.Calender;
 import com.refutrue.athena.utils.template.annotation.Column;
 
 import lombok.Data;

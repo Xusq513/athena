@@ -15,6 +15,7 @@ import com.refutrue.athena.utils.CommonUtil;
 import com.refutrue.athena.utils.RedisUtil;
 import com.refutrue.athena.utils.StringUtil;
 import com.refutrue.athena.utils.base.BaseServiceImpl;
+import com.refutrue.athena.utils.component.interfaces.ISelect;
 import com.refutrue.athena.utils.exception.AthenaException;
 
 /**
@@ -22,8 +23,8 @@ import com.refutrue.athena.utils.exception.AthenaException;
  * @DateTime: 2018-11-08 03:31:34
  * @Description: 字典信息维护çä¸å¡å±
  */
-@Service
-public class DicServiceImpl extends BaseServiceImpl<Dic> {
+@Service("dicServiceImpl")
+public class DicServiceImpl extends BaseServiceImpl<Dic> implements ISelect{
 	
 	public static final String REDIS_KEY = "KEY_DIC";
 	
@@ -66,6 +67,28 @@ public class DicServiceImpl extends BaseServiceImpl<Dic> {
     	}
     	return list;
     }
+    
+    @Override
+    public Map<String,String> select(String type){
+    	 Map<String,String> outMap = new HashMap<>();
+         List<Dic> list = getDicByType(type);
+         list.forEach(o -> {
+         	outMap.put(o.getCode(), o.getName());
+         });
+         return outMap;
+    }
+    
+    public List<Map<String,String>> selectList(String type){
+   	 List<Map<String,String>> outMapList = new ArrayList<>();
+        List<Dic> list = getDicByType(type);
+        list.forEach(o -> {
+        	Map<String,String> outMap = new HashMap<>();
+        	outMap.put("code", o.getCode());
+        	outMap.put("name", o.getName());
+        	outMapList.add(outMap);
+        });
+        return outMapList;
+   }
     
     private List<Dic> cacheList(String type) {
     	if(StringUtil.isEmptyOrNull(type)) {

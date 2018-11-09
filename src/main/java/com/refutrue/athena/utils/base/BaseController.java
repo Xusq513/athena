@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.alibaba.fastjson.JSON;
-import com.refutrue.athena.utils.ReflectUtil;
 import com.refutrue.athena.utils.ResponseMsg;
 import com.refutrue.athena.utils.StringUtil;
+import com.refutrue.athena.utils.component.convert.BindConvert;
 import com.refutrue.athena.utils.constants.WebContants;
 import com.refutrue.athena.utils.exception.AthenaException;
 import com.refutrue.athena.utils.pojo.Pagination;
@@ -31,6 +31,9 @@ import com.refutrue.athena.utils.validate.ValidateFactory;
 public abstract class BaseController<T> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    @Autowired
+    private BindConvert bindConvert;
 
     protected BaseService<T> baseService;
 
@@ -111,7 +114,7 @@ public abstract class BaseController<T> {
         String id = request.getParameter(WebContants._ID);
         try{
             T t = baseService.getEntityById(id);
-            responseMsg.setData(ReflectUtil.bean2StringMap(entityClass, t));
+            responseMsg.setData(bindConvert.convert(entityClass, t));
         }catch (AthenaException e){
             e.printStackTrace();
             responseMsg.setMessage(e.getMessage());
@@ -132,7 +135,7 @@ public abstract class BaseController<T> {
         try{
             Map<String,Object> inMap = buildSelectMap(request);
             List<T> list = baseService.getAllEntityByCondition(inMap);
-            responseMsg.setData(ReflectUtil.beans2Map(entityClass, list));
+            responseMsg.setData(bindConvert.convertList(entityClass, list));
         }catch (AthenaException e){
             e.printStackTrace();
             responseMsg.setMessage(e.getMessage());
