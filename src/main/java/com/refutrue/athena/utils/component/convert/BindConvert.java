@@ -2,7 +2,6 @@ package com.refutrue.athena.utils.component.convert;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.refutrue.athena.utils.ApplicationContextProvider;
-import com.refutrue.athena.utils.DateUtil;
 import com.refutrue.athena.utils.StringUtil;
-import com.refutrue.athena.utils.component.annotation.Calender;
-import com.refutrue.athena.utils.component.annotation.Select;
-import com.refutrue.athena.utils.component.interfaces.ISelect;
-import com.refutrue.athena.utils.template.annotation.Ignore;
 
 @Component
 public class BindConvert {
@@ -71,7 +65,6 @@ public class BindConvert {
 	}
 
 	/**
-	 * TODO 这里需要进行重构 将某个字段进行转化
 	 * 
 	 * @param f
 	 *            字段类型
@@ -81,34 +74,13 @@ public class BindConvert {
 	 */
 	private String convertField(Field f, Object o) {
 		String returnStr = "";
+		List<IConvert> convertInterfaces = context.getBeanListByOrder(IConvert.class);
 		if (o != null) {
-			// 如果是日期控件，需要进行日期转化
-			Calender calender = f.getAnnotation(Calender.class);
-			// 如果不不是数据库字段
-			Ignore ignore = f.getAnnotation(Ignore.class);
-			// 如果是选项标签，会进行转化
-			Select select = f.getAnnotation(Select.class);
-			if (calender != null && StringUtil.isNotEmptyOrNull(calender.javaFormatter())
-					&& f.getType() == Date.class) {
-				returnStr = DateUtil.date2Str((Date) o, calender.javaFormatter());
-			} else if (select != null) {
-				 ISelect selectImpl = (ISelect) context.getBean(select.component());
-				 Map<String,String> codeMap = selectImpl.select(select.type());
-				 if(StringUtil.isNotEmptyOrNull(o.toString())) {
-					 StringBuilder sb = new StringBuilder();
-					 String[] codes = o.toString().split(",");
-					 for(String code : codes) {
-						 String value = StringUtil.obj2Str(codeMap.get(code));
-						 sb.append(value);
-						 sb.append(",");
-					 }
-					 sb.setLength(sb.length() - 1);
-					 returnStr = sb.toString();
-				 }
-			} else if (ignore != null) {
-				returnStr = null;
-			} else {
-				returnStr = o.toString();
+			for(IConvert convert : convertInterfaces) {
+				returnStr = convert.convert(f, o);
+				if(returnStr == null || StringUtil.isNotEmptyOrNull(returnStr)) {
+					break;
+				}
 			}
 		}
 		return returnStr;

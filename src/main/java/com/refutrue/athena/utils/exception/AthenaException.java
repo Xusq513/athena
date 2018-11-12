@@ -28,7 +28,6 @@ public class AthenaException extends RuntimeException {
     public AthenaException(Throwable cause) {
 
         super(cause);
-        // TODO Auto-generated constructor stub
     }
 
     public String getCode() {

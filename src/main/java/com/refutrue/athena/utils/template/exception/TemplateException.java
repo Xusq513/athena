@@ -30,7 +30,6 @@ public class TemplateException extends RuntimeException {
     public TemplateException(Throwable cause) {
 
         super(cause);
-        // TODO Auto-generated constructor stub
     }
 
     public String getCode() {
