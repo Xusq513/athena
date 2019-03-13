@@ -23,7 +23,7 @@ public class VelocityUtil {
 			ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 			ve.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");
 			ve.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
-			ve.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8");
+			ve.setProperty(Velocity.OUTPUT_ENCODING, "GBK");
 			ve.init();
 			Template t = ve.getTemplate("templates/" + templateName);
 			sw = new StringWriter();
