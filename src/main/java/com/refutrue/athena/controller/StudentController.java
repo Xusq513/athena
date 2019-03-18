@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author: Michael Xu
- * @DateTime: 2018-11-07 04:17:40
- * @Description: 学生信息çæ§å¶å±ï¼éµä»Restè§è
+ * @DateTime: 2019-03-13 05:05:55
+ * @Description: 学生信息的控制层，遵从Rest规范
  */
 @RestController
 @RequestMapping(value = "/Student")
 public class StudentController extends BaseController<Student> {
-	
+
     @Autowired
     public StudentController(StudentServiceImpl studentService) {
         super.entityClass = Student.class;

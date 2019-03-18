@@ -5,10 +5,9 @@ import com.refutrue.athena.utils.base.BaseMapper;
 
 /**
  * @Author: Michael Xu
- * @DateTime: 2018-11-07 04:17:40
- * @Description: 学生信息çDaoå±
+ * @DateTime: 2019-03-13 05:05:55
+ * @Description: 学生信息的Dao层
  */
 public interface StudentMapper extends BaseMapper<Student>{
 
-	public Student selectByPrimaryKey(Integer userId);
 }

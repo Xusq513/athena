@@ -2,4 +2,4 @@ DROP TABLE
 IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
-    `user_name` VARCHAR(50)      COMMENT 'userName' ,    `password` VARCHAR(50)      COMMENT 'password' ,    `phone` VARCHAR(50)      COMMENT 'phone' ,    `id` INT    PRIMARY KEY   AUTO_INCREMENT   COMMENT 'id' ,    `operate_user` VARCHAR(50)      COMMENT 'operateUser' ,    `operate_time` DATETIME       COMMENT 'operateTime' ,    `create_time` DATETIME       COMMENT 'createTime'     ) COMMENT = '鐢ㄦ埛淇℃伅' ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    `login_id` VARCHAR(50)      COMMENT '登录账号' ,    `passwd` VARCHAR(50)      COMMENT '密码' ,    `id` INT    PRIMARY KEY   AUTO_INCREMENT   COMMENT 'id' ,    `operate_user` VARCHAR(50)      COMMENT 'operateUser' ,    `operate_time` DATETIME       COMMENT 'operateTime' ,    `create_time` DATETIME       COMMENT 'createTime'     ) COMMENT = '用户基本信息' ENGINE = InnoDB DEFAULT CHARSET = utf8;

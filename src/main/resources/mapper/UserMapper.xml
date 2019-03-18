@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.refutrue.athena.mapper.UserMapper">
+
+  <resultMap id="BaseResultMap" type="com.refutrue.athena.bean.User">
+          <result column="login_id"  property="loginId" />
+          <result column="passwd"  property="passwd" />
+          <result column="id"  property="id" />
+          <result column="operate_user"  property="operateUser" />
+          <result column="operate_time"  property="operateTime" />
+          <result column="create_time"  property="createTime" />
+      </resultMap>
+
+  <sql id="Base_Column_List">
+           login_id ,           passwd ,           id ,           operate_user ,           operate_time ,           create_time        </sql>
+
+  <insert id="insert" parameterType="com.refutrue.athena.bean.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+              <if test="loginId != null">
+         login_id,
+        </if>
+              <if test="passwd != null">
+         passwd,
+        </if>
+              <if test="id != null">
+         id,
+        </if>
+              <if test="operateUser != null">
+         operate_user,
+        </if>
+              <if test="operateTime != null">
+         operate_time,
+        </if>
+              <if test="createTime != null">
+         create_time,
+        </if>
+          </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+              <if test="loginId != null">
+        #{loginId},
+      </if>
+              <if test="passwd != null">
+        #{passwd},
+      </if>
+              <if test="id != null">
+        #{id},
+      </if>
+              <if test="operateUser != null">
+        #{operateUser},
+      </if>
+              <if test="operateTime != null">
+        #{operateTime},
+      </if>
+              <if test="createTime != null">
+        #{createTime},
+      </if>
+          </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id}
+  </delete>
+
+  <update id="update" parameterType="com.refutrue.athena.bean.User">
+    update t_user
+    <set>
+                         <if test="loginId != null">
+           login_id = #{loginId},
+         </if>
+                         <if test="passwd != null">
+           passwd = #{passwd},
+         </if>
+                         	#continue
+                  <if test="id != null">
+           id = #{id},
+         </if>
+                         <if test="operateUser != null">
+           operate_user = #{operateUser},
+         </if>
+                         <if test="operateTime != null">
+           operate_time = #{operateTime},
+         </if>
+                         <if test="createTime != null">
+           create_time = #{createTime},
+         </if>
+           </set>
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+                <if test="loginId != null">
+           and login_id = #{loginId}
+         </if>
+                <if test="passwd != null">
+           and passwd = #{passwd}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+     ${order}
+  </select>
+
+  <select id="selectPagination" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    (select
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+                <if test="loginId != null">
+           and login_id = #{loginId}
+         </if>
+                <if test="passwd != null">
+           and passwd = #{passwd}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+    ${order}
+    ) t
+     limit #{pageSize} offset #{startRow}
+  </select>
+
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Long">
+    select
+    count(1)
+    from t_user
+    <where>
+               <if test="loginId != null">
+           and login_id = #{loginId}
+         </if>
+                <if test="passwd != null">
+           and passwd = #{passwd}
+         </if>
+                <if test="id != null">
+           and id = #{id}
+         </if>
+                <if test="operateUser != null">
+           and operate_user = #{operateUser}
+         </if>
+                <if test="operateTime != null">
+           and operate_time = #{operateTime}
+         </if>
+                <if test="createTime != null">
+           and create_time = #{createTime}
+         </if>
+           </where>
+  </select>
+</mapper>

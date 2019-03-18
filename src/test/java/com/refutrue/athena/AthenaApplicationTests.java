@@ -1,5 +1,6 @@
 package com.refutrue.athena;
 
+import com.refutrue.athena.bean.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -23,7 +24,7 @@ public class AthenaApplicationTests {
     
     @Test
     public void contextLoads() {
-        builderFactory.execute(Student.class);
+        builderFactory.execute(User.class);
     }
     
 //    @Test
