@@ -22,10 +22,10 @@ public class AthenaApplicationTests {
 //    @Autowired
 //    private RedisUtil redisUtil;
     
-    @Test
-    public void contextLoads() {
-        builderFactory.execute(User.class);
-    }
+//    @Test
+//    public void contextLoads() {
+//        builderFactory.execute(User.class);
+//    }
     
 //    @Test
 //    public void testCache() {

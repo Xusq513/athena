@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.refutrue.athena.interceptor.Cors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import com.refutrue.athena.utils.validate.ValidateFactory;
  * @Date: 2018/11/5 10:01
  * @Description:
  */
-public abstract class BaseController<T> {
+public abstract class BaseController<T> extends Cors {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     
