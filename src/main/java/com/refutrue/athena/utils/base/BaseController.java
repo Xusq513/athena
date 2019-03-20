@@ -187,7 +187,7 @@ public abstract class BaseController<T> extends Cors {
             Map<String,Object> jsonMap = JSON.parseObject(json);
             String whereStr = StringUtil.obj2Str(jsonMap.get("where"));
             if(StringUtil.isNotEmptyOrNull(whereStr)){
-                inMap.putAll(JSON.parseObject(whereStr));
+                inMap.putAll(StringUtil.trimValueJSONObject(JSON.parseObject(whereStr)));
             }
             String orderStr = StringUtil.obj2Str(jsonMap.get("order"));
             // TODO 这个地方先不考虑多个order by 字段的顺序问题

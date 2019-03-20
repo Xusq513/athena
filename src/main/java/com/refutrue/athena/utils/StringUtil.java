@@ -1,5 +1,6 @@
 package com.refutrue.athena.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.util.HtmlUtils;
@@ -7,9 +8,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Format;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -781,5 +780,47 @@ public final class StringUtil extends StringUtils {
             chars[0] += 32;
         }
         return new String(chars);
+    }
+
+    /**
+     *  将Map中空字符串和空对象去掉
+     * @param map
+     * @return
+     */
+    public static Map<Object,Object> trimValueMap(Map<Object,Object> map){
+        Map<Object,Object> returnMap = new HashMap<>();
+        Set<Object> keys = map.keySet();
+        for(Object key : keys){
+            Object value = map.get(key);
+            if(value == null){
+                continue;
+            }
+            if(value instanceof String && "".equals(value.toString())){
+                continue;
+            }
+            returnMap.put(key,value);
+        }
+        return returnMap;
+    }
+
+    /**
+     * 将JSONObject中空字符串和空对象去掉
+     * @param jsonObject
+     * @return
+     */
+    public static Map<String,Object> trimValueJSONObject(JSONObject jsonObject){
+        Map<String,Object> returnMap = new HashMap<>();
+        Set<String> keys = jsonObject.keySet();
+        for(String key : keys){
+            Object value = jsonObject.get(key);
+            if(value == null){
+                continue;
+            }
+            if(value instanceof String && "".equals(value.toString())){
+                continue;
+            }
+            returnMap.put(key,value);
+        }
+        return returnMap;
     }
 }
